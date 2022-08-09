@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -10,6 +10,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { authContext } from '../../context/AuthContext'
+import { useNavigate } from 'react-router-dom';
 
 function Copyright(props) {
   return (
@@ -27,6 +29,27 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function Authorization() {
+  const { 
+    email, 
+    setEmail, 
+    password, 
+    setPassword, 
+    handleLogin, 
+    handleSignUp,
+    hasAccount, 
+    setHasAccount, 
+    emailError, 
+    passwordError,
+    user
+  } = useContext(authContext)
+
+  const navigate = useNavigate()
+
+  const signIn = () =>{
+    handleLogin()
+    navigate('/')
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -53,6 +76,8 @@ export default function Authorization() {
               id="email"
               label="Email Address"
               name="email"
+              value={email}
+              onChange={(e)=>setEmail(e.target.value)}
               autoComplete="email"
               autoFocus
             />
@@ -63,23 +88,52 @@ export default function Authorization() {
               name="password"
               label="Password"
               type="password"
+              value={password}
+              onChange={(e)=>setPassword(e.target.value)}
               id="password"
               autoComplete="current-password"
             />
-            <Button
+            <span>{passwordError}</span>
+            <span>{emailError}</span>
+            {
+              hasAccount ? (
+                <Button
                 type="button"
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
+                onClick={signIn}
                 >
                 Sign In
             </Button>
+              ) : (
+                <Button
+                type="button"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+                onClick={handleSignUp}
+                >
+                Sign Up
+            </Button>
+              )
+            }
+            
             <Grid container>
               <Grid item>
-              <Link 
-                href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
-                </Link>
+                {
+                  hasAccount ? (
+                    <Link onClick={()=>setHasAccount(!hasAccount)}
+                      href="#" variant="body2">
+                      {"Don't have an account? Sign Up"}
+                    </Link>
+                  ) : (
+                    <Link onClick={()=>setHasAccount(!hasAccount)}
+                      href="#" variant="body2">
+                      {"Already have an account? Sign In"}
+                    </Link>
+                  )
+                }
               </Grid>
             </Grid>
           </Box>
