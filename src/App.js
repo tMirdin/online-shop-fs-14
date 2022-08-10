@@ -7,13 +7,13 @@ import AuthContextProvider from "./context/AuthContext";
 
 const App = () => {
   return (
-    <AuthContextProvider>
-      <ProductContextProvider>
-        <NavBar />
-        <MainRoutes />
-        <Footer />
-      </ProductContextProvider>
-    </AuthContextProvider>
+    // <AuthContextProvider>
+    <ProductContextProvider>
+      <NavBar />
+      <MainRoutes />
+      <Footer />
+    </ProductContextProvider>
+    // </AuthContextProvider>
   );
 };
 

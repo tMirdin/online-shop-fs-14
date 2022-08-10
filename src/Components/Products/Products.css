@@ -1,0 +1,25 @@
+.main_box {
+  background-color: rgb(236, 228, 228);
+  display: flex;
+  justify-content: space-between;
+}
+
+.filter {
+  box-sizing: border-box;
+  background-color: #cfcfcf98;
+  width: 20%;
+  height: 400px;
+  margin-top: 50px;
+  padding: 20px;
+  margin-left: 20px;
+  border-radius: 25px;
+}
+
+.container1 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  width: 80%;
+  min-height: 1000px;
+  padding-top: 50px;
+}

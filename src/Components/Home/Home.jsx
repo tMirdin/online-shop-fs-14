@@ -9,9 +9,7 @@ const Home = () => {
       <Billboard />
       <Grid item md={9}>
         <Paper>
-          <Container>
-            <ProductsList />
-          </Container>
+          <ProductsList />
         </Paper>
       </Grid>
     </div>
