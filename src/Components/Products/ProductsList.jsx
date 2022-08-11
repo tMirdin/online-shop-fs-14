@@ -12,18 +12,25 @@ const ProductsList = () => {
   // Хук useSearchParams предназначен для чтения и изменения строки запроса в URL для текущего маршрута. По аналогии с хуком useState возвращает значение и функцию для изменения этого значения.
   //   https://tokmakov.msk.ru/blog/item/678#:~:text=useSearchParams,%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8E%20%D0%B4%D0%BB%D1%8F%20%D0%B8%D0%B7%D0%BC%D0%B5%D0%BD%D0%B5%D0%BD%D0%B8%D1%8F%20%D1%8D%D1%82%D0%BE%D0%B3%D0%BE%20%D0%B7%D0%BD%D0%B0%D1%87%D0%B5%D0%BD%D0%B8%D1%8F.
 
-  console.log(...searchParams);
+  console.log(searchParams);
 
-  const [type, setType] = useState("");
+  const [type, setType] = useState(searchParams.get("category") || "all");
+
+  const [price, setPrice] = useState([0, 200000]);
 
   const paramsWithType = () => {
     return {
       category: type,
+      price_gte: price[0],
+      price_lte: price[1],
     };
   };
 
   const paramsNoType = () => {
-    return {};
+    return {
+      price_gte: price[0],
+      price_lte: price[1],
+    };
   };
 
   useEffect(() => {
@@ -36,17 +43,22 @@ const ProductsList = () => {
 
   useEffect(() => {
     getProducts();
-    if (type === "") {
+    if (type === "all") {
       setSearchParams(paramsNoType());
     } else {
       setSearchParams(paramsWithType());
     }
-  }, [searchParams, type]);
+  }, [searchParams, type, price]);
 
   return (
     <div className="main_box">
       <div className="filter">
-        <Filter type={type} setType={setType} />
+        <Filter
+          type={type}
+          setType={setType}
+          price={price}
+          setPrice={setPrice}
+        />
       </div>
       <div className="container1">
         {productsArr.map((item) => (

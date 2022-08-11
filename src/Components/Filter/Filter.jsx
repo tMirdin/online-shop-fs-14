@@ -4,10 +4,12 @@ import {
   FormLabel,
   Radio,
   RadioGroup,
+  Slider,
 } from "@mui/material";
 import React from "react";
 
-const Filter = ({ type, setType }) => {
+const Filter = ({ type, setType, price, setPrice }) => {
+  console.log(price);
   return (
     <div>
       <FormControl>
@@ -36,6 +38,16 @@ const Filter = ({ type, setType }) => {
             label="Все товары"
           />
         </RadioGroup>
+        <FormLabel id="demo-radio-buttons-group-label">По ценам</FormLabel>
+        <Slider
+          getAriaLabel={() => "Temperature range"}
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+          valueLabelDisplay="auto"
+          // getAriaValueText={valuetext}
+          min={0}
+          max={200000}
+        />
       </FormControl>
     </div>
   );
