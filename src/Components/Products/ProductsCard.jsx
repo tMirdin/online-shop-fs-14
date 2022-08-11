@@ -13,11 +13,14 @@ import {
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { red } from "@mui/material/colors";
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import "./Products.css";
+import { cartContext } from "../../context/CartContextProvider";
 
 const ProductsCard = ({ product }) => {
+  const { addProductCart } = useContext(cartContext);
+
   return (
     <Card
       sx={{
@@ -51,11 +54,13 @@ const ProductsCard = ({ product }) => {
         <IconButton aria-label="add to fav">
           <FavoriteIcon />
         </IconButton>
-        <IconButton aria-label="add to cart">
+        <Button onClick={() => addProductCart(product)}>
           <AddShoppingCartIcon />
-        </IconButton>
+        </Button>
         <Button variant="outlined">
-          <Link to={`/details/${product.id}`}>Подробнее</Link>
+          <Link to={`/details/${product.id}`} style={{ color: "blue" }}>
+            Подробнее
+          </Link>
         </Button>
       </CardActions>
     </Card>

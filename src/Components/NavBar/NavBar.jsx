@@ -16,6 +16,7 @@ import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import { Link } from "react-router-dom";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -201,8 +202,8 @@ const NavBar = () => {
               aria-label="show 17 new notifications"
               color="inherit"
             >
-              <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
+              <Badge badgeContent={0} color="error">
+                <ShoppingCartIcon />
               </Badge>
             </IconButton>
             <IconButton

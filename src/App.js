@@ -4,15 +4,18 @@ import MainRoutes from "./MainRoutes";
 import Footer from "./Components/Footer/Footer";
 import ProductContextProvider from "./context/ProductContextProvider";
 import AuthContextProvider from "./context/AuthContext";
+import CartContextProvider from "./context/CartContextProvider";
 
 const App = () => {
   return (
     <AuthContextProvider>
-      <ProductContextProvider>
-        <NavBar />
-        <MainRoutes />
-        <Footer />
-      </ProductContextProvider>
+      <CartContextProvider>
+        <ProductContextProvider>
+          <NavBar />
+          <MainRoutes />
+          <Footer />
+        </ProductContextProvider>
+      </CartContextProvider>
     </AuthContextProvider>
   );
 };
