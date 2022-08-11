@@ -14,7 +14,20 @@ const CartContextProvider = ({ children }) => {
     let newProduct = {
       item: productItem,
     };
-    cart.products.push(newProduct);
+
+    // Хранятся только дубликаты
+    let filterCart = cart.products.filter((elem) => {
+      return elem.item.id === productItem.id;
+    });
+    console.log(filterCart);
+
+    if (filterCart.length > 0) {
+      cart.products = cart.products.filter((elem) => {
+        return elem.item.id !== productItem.id;
+      });
+    } else {
+      cart.products.push(newProduct);
+    }
 
     localStorage.setItem("cart", JSON.stringify(cart));
   };
