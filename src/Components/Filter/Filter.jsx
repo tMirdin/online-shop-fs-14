@@ -9,14 +9,14 @@ import {
 import React from "react";
 
 const Filter = ({ type, setType, price, setPrice }) => {
-  console.log(price);
+  // console.log(price);
   return (
     <div>
       <FormControl>
         <FormLabel id="demo-radio-buttons-group-label">По категориям</FormLabel>
         <RadioGroup
           aria-labelledby="demo-radio-buttons-group-label"
-          defaultValue="female"
+          defaultValue="all"
           name="radio-buttons-group"
           value={type}
           onChange={(e) => setType(e.target.value)}

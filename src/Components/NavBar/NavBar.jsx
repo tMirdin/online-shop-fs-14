@@ -17,6 +17,8 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import { Link } from "react-router-dom";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { getCountProductsCart } from "../../helpers/cartFunctions";
+import { cartContext } from "../../context/CartContextProvider";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -59,6 +61,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const NavBar = () => {
+  const { cartLength } = React.useContext(cartContext);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -202,9 +205,11 @@ const NavBar = () => {
               aria-label="show 17 new notifications"
               color="inherit"
             >
-              <Badge badgeContent={0} color="error">
-                <ShoppingCartIcon />
-              </Badge>
+              <Link to="/cart">
+                <Badge badgeContent={cartLength} color="error">
+                  <ShoppingCartIcon />
+                </Badge>
+              </Link>
             </IconButton>
             <IconButton
               size="large"

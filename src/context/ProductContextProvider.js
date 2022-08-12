@@ -28,7 +28,7 @@ const ProductContextProvider = ({ children }) => {
   const location = useLocation();
   //   Хук useLocation возвращает объект location, представляющий текущий URL. Его можно рассматривать как useState, который возвращает новое местоположение при каждом изменении URL. Этот хук можно использовать, например, чтобы вызвать событие просмотра новой страницы для инструмента веб-аналитики.
 
-  console.log(location);
+  // console.log(location);
 
   const getProducts = async () => {
     const { data } = await axios(`${API}${location.search}`);
