@@ -2,7 +2,7 @@
   "products": [
     {
       "id": 0,
-      "title": "Iphone 13",
+      "title": "Iphone 13 Мирдин",
       "description": "Смартфон iPhone 13 обладает хорошей камерой на 12+12 Мп и батареей емкостью мАч. Оперативной памяти на 4 ГБ хватает для стабильной работы системы, объем встроенной памяти составляет 64 ГБ.",
       "price": 83000,
       "image": "https://svetofor.info/images/detailed/156/smartfon-apple-iphone-xs-max-64-gb-ram-4-gb-dual-sim-space-gray-1.jpg",
@@ -48,6 +48,15 @@
     {
       "id": 5,
       "title": "Mi laptop",
+      "description": "Смартфон iPhone 13 обладает хорошей камерой на 12+12 Мп и батареей емкостью мАч. Оперативной памяти на 4 ГБ хватает для стабильной работы системы, объем встроенной памяти составляет 64 ГБ.",
+      "price": 73000,
+      "image": "https://svetofor.info/images/detailed/156/smartfon-apple-iphone-xs-max-64-gb-ram-4-gb-dual-sim-space-gray-1.jpg",
+      "category": "laptop",
+      "model": "xiaomi"
+    },
+    {
+      "id": 6,
+      "title": "HP laptop",
       "description": "Смартфон iPhone 13 обладает хорошей камерой на 12+12 Мп и батареей емкостью мАч. Оперативной памяти на 4 ГБ хватает для стабильной работы системы, объем встроенной памяти составляет 64 ГБ.",
       "price": 73000,
       "image": "https://svetofor.info/images/detailed/156/smartfon-apple-iphone-xs-max-64-gb-ram-4-gb-dual-sim-space-gray-1.jpg",

@@ -9,12 +9,17 @@ const API = "http://localhost:8000/products";
 const INIT_STATE = {
   products: [],
   productDetails: null,
+  pageTotalCount: 1,
 };
 
 const reducer = (prevState = INIT_STATE, action) => {
   switch (action.type) {
     case "GET_PRODUCTS":
-      return { ...prevState, products: action.payload };
+      return {
+        ...prevState,
+        products: action.payload.data,
+        pageTotalCount: Math.ceil(action.payload.headers["x-total-count"] / 3),
+      };
     case "GET_ONE_PRODUCT":
       return { ...prevState, productDetails: action.payload };
     default:
@@ -31,10 +36,11 @@ const ProductContextProvider = ({ children }) => {
   // console.log(location);
 
   const getProducts = async () => {
-    const { data } = await axios(`${API}${location.search}`);
+    const res = await axios(`${API}${location.search}`);
+    console.log(res);
     dispatch({
       type: "GET_PRODUCTS",
-      payload: data,
+      payload: res,
     });
   };
 
@@ -51,6 +57,7 @@ const ProductContextProvider = ({ children }) => {
     getOneProduct,
     productsArr: state.products,
     productDetails: state.productDetails,
+    pageTotalCount: state.pageTotalCount,
   };
 
   return (
