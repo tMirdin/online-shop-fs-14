@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { createContext, useReducer } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export const productsContext = createContext();
 
@@ -18,7 +18,7 @@ const reducer = (prevState = INIT_STATE, action) => {
       return {
         ...prevState,
         products: action.payload.data,
-        pageTotalCount: Math.ceil(action.payload.headers["x-total-count"] / 3),
+        pageTotalCount: Math.ceil(action.payload.headers["x-total-count"] / 6),
       };
     case "GET_ONE_PRODUCT":
       return { ...prevState, productDetails: action.payload };
@@ -35,9 +35,10 @@ const ProductContextProvider = ({ children }) => {
 
   // console.log(location);
 
+  const navigate = useNavigate();
+
   const getProducts = async () => {
     const res = await axios(`${API}${location.search}`);
-    console.log(res);
     dispatch({
       type: "GET_PRODUCTS",
       payload: res,
@@ -52,9 +53,31 @@ const ProductContextProvider = ({ children }) => {
     });
   };
 
+  const addProduct = async (product) => {
+    await axios.post(API, product);
+    getProducts();
+    navigate("/");
+  };
+
+  const deleteProduct = async (id) => {
+    await axios.delete(`${API}/${id}`);
+    getProducts();
+    navigate("/");
+  };
+
+  const editProduct = async (id, obj) => {
+    console.log(obj);
+    await axios.patch(`${API}/${id}`, obj);
+    getProducts();
+    navigate("/");
+  };
+
   const cloud = {
     getProducts,
     getOneProduct,
+    addProduct,
+    deleteProduct,
+    editProduct,
     productsArr: state.products,
     productDetails: state.productDetails,
     pageTotalCount: state.pageTotalCount,

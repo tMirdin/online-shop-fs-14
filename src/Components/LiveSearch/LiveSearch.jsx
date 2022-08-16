@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
-import { useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -47,11 +47,14 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const LiveSearch = () => {
   const [searchValue, setSearchValue] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
+  const location = useLocation();
 
   useEffect(() => {
-    setSearchParams({
-      q: searchValue,
-    });
+    if (location.pathname === "/products") {
+      setSearchParams({
+        q: searchValue,
+      });
+    }
   }, [searchValue]);
 
   return (
@@ -63,7 +66,7 @@ const LiveSearch = () => {
         placeholder="Search…"
         inputProps={{ "aria-label": "search" }}
         value={searchValue}
-        onChange={(e) => setSearchValue(e.target.value)}
+        onChange={(e) => setSearchValue(e.target.value || "")}
       />
     </Search>
   );

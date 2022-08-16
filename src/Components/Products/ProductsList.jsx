@@ -25,26 +25,26 @@ const ProductsList = () => {
   const paramsWithType = () => {
     return {
       category: type,
-      q: searchParams.get("q"),
+      q: searchParams.get("q") || "",
       price_gte: price[0],
       price_lte: price[1],
       _page: page,
-      _limit: 3,
+      _limit: 6,
     };
   };
 
   const paramsNoType = () => {
     return {
-      q: searchParams.get("q"),
+      q: searchParams.get("q") || "",
       price_gte: price[0],
       price_lte: price[1],
       _page: page,
-      _limit: 3,
+      _limit: 6,
     };
   };
 
   useEffect(() => {
-    getProducts();
+    // getProducts();
     if (searchParams.get("category")) {
       setSearchParams(paramsWithType());
     } else {
@@ -63,25 +63,34 @@ const ProductsList = () => {
 
   return (
     <>
-      <div className="main_box">
-        <div className="filter">
-          <Filter
-            type={type}
-            setType={setType}
-            price={price}
-            setPrice={setPrice}
-          />
-        </div>
-        <div className="container1">
-          {productsArr.map((item) => (
-            <ProductsCard product={item} key={item.id} />
-          ))}
+      <div
+        style={{
+          padding: "20px 0",
+        }}
+        className="bgList"
+      >
+        <h2>Наши телефоны</h2>
+        <div className="main_box">
+          <div className="filter">
+            <Filter
+              type={type}
+              setType={setType}
+              price={price}
+              setPrice={setPrice}
+            />
+          </div>
+          <div className="container1">
+            {productsArr.map((item) => (
+              <ProductsCard product={item} key={item.id} />
+            ))}
+          </div>
         </div>
       </div>
-      <div style={{ margin: "50px auto", textAlign: "center" }}>
+      <div className="d-flex justify-content-center my-4">
         <Pagination
           count={+pageTotalCount}
           variant="outlined"
+          color="primary"
           shape="rounded"
           page={+page}
           onChange={(e, pageVal) => {
