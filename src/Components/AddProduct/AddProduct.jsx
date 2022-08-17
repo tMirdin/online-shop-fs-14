@@ -4,6 +4,7 @@ import Button from "@mui/material/Button";
 import "./addProduct.css";
 import { useContext, useState } from "react";
 import { productsContext } from "../../context/ProductContextProvider";
+import { InputLabel, MenuItem, Select } from "@mui/material";
 
 export default function AddProduct() {
   const { addProduct } = useContext(productsContext);
@@ -65,14 +66,26 @@ export default function AddProduct() {
         value={description}
         onChange={(e) => setDescription(e.target.value)}
       />
-      <TextField
+      {/* <TextField
         sx={{ width: 300 }}
         id="outlined-basic"
         label="Category"
         variant="outlined"
         value={category}
         onChange={(e) => setCategory(e.target.value)}
-      />
+      /> */}
+      <InputLabel id="demo-simple-select-label">Category</InputLabel>
+      <Select
+        labelId="demo-simple-select-label"
+        id="demo-simple-select"
+        value={category}
+        label="Category"
+        onChange={(e) => setCategory(e.target.value)}
+      >
+        <MenuItem value={"phone"}>Phone</MenuItem>
+        <MenuItem value={"laptop"}>Laptop</MenuItem>
+        <MenuItem value={"watch"}>Watchs</MenuItem>
+      </Select>
       <Button onClick={handleClick} variant="contained" disableElevation>
         Add Product
       </Button>

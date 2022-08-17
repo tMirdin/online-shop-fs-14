@@ -95,6 +95,14 @@
       "price": 73000,
       "image": "https://object.pscloud.io/cms/cms/Photo/img_0_911_602_0_1.jpg",
       "category": "watch"
+    },
+    {
+      "title": "Xiaomi",
+      "price": 190000,
+      "image": "https://softech.kg/image/cache/4f31d4b112db8936b4d6e696e8dd6ed4.jpg",
+      "description": "123456789o2345678",
+      "category": "phone",
+      "id": 13
     }
   ]
 }

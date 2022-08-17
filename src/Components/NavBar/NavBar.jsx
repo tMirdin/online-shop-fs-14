@@ -12,16 +12,21 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { cartContext } from "../../context/CartContextProvider";
 import LiveSearch from "../LiveSearch/LiveSearch";
-import { ThemeProvider, createTheme } from "@mui/material";
+import { ThemeProvider, createTheme, Button } from "@mui/material";
+import { authContext } from "../../context/AuthContext";
+import { spacing } from "@mui/system";
 
 const NavBar = () => {
   const { cartLength } = React.useContext(cartContext);
+  const { user, handleLogout } = React.useContext(authContext);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+
+  const location = useLocation();
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -120,7 +125,7 @@ const NavBar = () => {
   let date = new Date().getHours();
   console.log(date);
   function themeNavbar() {
-    if (date >= 20) {
+    if (date >= 13) {
       return "dark";
     } else if (date <= 6) {
       return "dark";
@@ -160,7 +165,7 @@ const NavBar = () => {
             >
               <Link to="/">Code-Shop</Link>
             </Typography>
-            <LiveSearch />
+            {location.pathname === "/products" ? <LiveSearch /> : null}
             <Link to="/products" style={{ margin: "0 20px" }}>
               Products
             </Link>
@@ -189,13 +194,17 @@ const NavBar = () => {
                   </Badge>
                 </Link>
               </IconButton>
+              <Link to="/">
+                {user.email ? user.email : <span>Не зашел</span>}
+              </Link>
+              <Button onClick={handleLogout}>LogOut</Button>
               <IconButton
                 size="large"
                 edge="end"
                 aria-label="account of current user"
-                aria-controls={menuId}
+                // aria-controls={menuId}
                 aria-haspopup="true"
-                onClick={handleProfileMenuOpen}
+                // onClick={handleProfileMenuOpen}
                 color="inherit"
               >
                 <Link to="/auth">
